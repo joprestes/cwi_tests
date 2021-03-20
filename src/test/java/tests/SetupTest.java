@@ -6,11 +6,11 @@ import utils.Utils;
 
 import static org.junit.Assert.assertTrue;
 
-public class SetupTest extends BaseTests{
+public class SetupTest extends BaseTests {
 
     @Test
-    public void testOpeningBrowserAndLoadPage(){
-        assertTrue (Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl()));
+    public void testOpeningBrowserAndLoadPage() {
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl()));
         System.out.println("Abrimos o navegador e carregamos a URL!");
 
     }
