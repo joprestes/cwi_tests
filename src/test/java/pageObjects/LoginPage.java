@@ -34,12 +34,12 @@ public class LoginPage extends LoginPageElementMapper {
 
 
 
-    // Passos para criação de nova conta
+
 
     @Step ("Preencheu Email Adress")
     public void fillEmailAdress(){
         Random random = new Random();
-        int x = random.nextInt(999);
+        int x = random.nextInt(9999);
         String newEmailAdress = "cwiteste" + x + "@gmail.com";
         newEmail.sendKeys(newEmailAdress);
     }
@@ -58,6 +58,7 @@ public class LoginPage extends LoginPageElementMapper {
     public void fillEmailAlreadyRegistered(){
         newEmail.sendKeys("meuemail@gmail.com");
     }
+
     @Step("Retornar mensagem de erro")
     public String getErrorMessageText (){
         return errorLabel.getText();

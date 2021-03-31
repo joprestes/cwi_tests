@@ -23,6 +23,11 @@ public class SetupTest extends BaseTests {/*
 
     }
 
+
+
+
+
+
     @Test
     @Story("Realizar o Login")
     public void testLogin() {
@@ -56,8 +61,12 @@ public class SetupTest extends BaseTests {/*
                 .contains("MY ACCOUNT"));
         System.out.println("Validou minha conta no site.");
 
-
     }
+
+
+
+
+
 
     @Test
     @Story("Pesquisar o termo 'Dress'")
@@ -83,6 +92,11 @@ public class SetupTest extends BaseTests {/*
 
     }
 
+
+
+
+
+
     @Test
     @Story("Acessar a página de Categoria T-Shirts")
     public void testAccessCategoryTshirts() {
@@ -100,6 +114,10 @@ public class SetupTest extends BaseTests {/*
         assertTrue(category.isPageTShirts());
 
     }
+
+
+
+
 
     @Test
     @Story("Ser direcionado à Página do Produto")
@@ -121,6 +139,10 @@ public class SetupTest extends BaseTests {/*
         assertTrue(pdp.getProductNamePDP().equals(nameProductCategory));
 
     }
+
+
+
+
 
     @Test
     @Story("Adicionar um produto ao carrinho")
@@ -144,16 +166,17 @@ public class SetupTest extends BaseTests {/*
 
         //Validação do nome do produto no carrinho
         assertTrue(cart.getProductNameCart().equals(nameProductPDP));
-    }
-*/
+
+    }*/
 
 
-    //A partir daqui  são os testes relativos ao desafio web
+
+    //********** A partir daqui  são os testes relativos ao desafio web **********
 
 
 
     @Test
-    @Story("Ser Direcionado para página de criação de nova conta")
+    @Story("Ser direcionado para página de criação de nova conta:")
     public void testNewAccountPage() throws Exception {
         HomePage home = new HomePage();
         LoginPage newLogin = new LoginPage();
@@ -172,16 +195,21 @@ public class SetupTest extends BaseTests {/*
 
         //Clicar no botão Create an Account
         newLogin.clickBtnCreateAnAccount();
-        System.out.println("Clicou no botão Create Account");
+        System.out.println("Clicou no botão Create Account.");
 
 
         //Ser Direcionado para a página de criação de nova conta
         assertTrue(newAccount.isCreationFormPresent());
         System.out.println("Direcionou corretamente para página de New Account.");
+
     }
 
+
+
+
+
     @Test
-    @Story("Tentar ser direcionado à página de criação de conta sem preencher e-mail")
+    @Story("Tentar ser direcionado à página de criação de conta sem preencher e-mail:")
     public void testNewAccountWithNullEmail() throws Exception {
         HomePage home = new HomePage();
         LoginPage newLogin = new LoginPage();
@@ -196,19 +224,24 @@ public class SetupTest extends BaseTests {/*
 
         //Clicar no botão Create an Account sem preenchar e-mail
         newLogin.clickBtnCreateAnAccount();
-        System.out.println("Clicou no botão Create Account");
+        System.out.println("Clicou no botão Create Account.");
 
         //Validar se irá direcionar para página de criação de conta com o campo e-mail vazio
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
                 concat("/index.php?controller=authentication&back=my-account")));
         assertEquals(invalidEmailErrorMessage, newLogin.getErrorMessageText());
-        System.out.println("Não permitiu o direcionamento para de conta sem preenchimento de E-mail");
+        System.out.println("Não permitiu o direcionamento para a página de criação de nova conta sem preenchimento" +
+                " adequado do campo de e-mail.");
+
+    }
 
 
-    }//ok
+
+
+
 
     @Test
-    @Story("Tentar direcionamento para página de criação de conta utilizando e-mail em formato inválido")
+    @Story("Tentar direcionamento para página de criação de conta utilizando e-mail em formato inválido:")
     public void testNewAccountWithInvalidEmail() throws Exception {
         HomePage home = new HomePage();
         LoginPage newLogin = new LoginPage();
@@ -226,19 +259,25 @@ public class SetupTest extends BaseTests {/*
 
         //Clicar no botão Create an Account
         newLogin.clickBtnCreateAnAccount();
-        System.out.println("Clicou no botão Create Account");
+        System.out.println("Clicou no botão Create Account.");
 
-        //Validar se irá direcionar para página de criação de conta com o campo e-mail vazio
+        //Validar se irá direcionar para página de criação de conta utilizando um e-mail em formato invalido.
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
                 concat("/index.php?controller=authentication&back=my-account")));
         assertEquals(invalidEmailErrorMessage, newLogin.getErrorMessageText());
 
-        System.out.println("Não permitiu o direcionamento para de conta com preenchimento de E-mail em formato inválido");
+        System.out.println("Não permitiu o direcionamento para página de criação de nova conta" +
+                " utilizando um endereço de  e-mail em formato inválido.");
 
-    }//ok
+    }
+
+
+
+
+
 
     @Test
-    @Story("Tentar direcionamento para página de criação de conta utilizando e-mail já cadastrado")
+    @Story("Tentar direcionamento para página de criação de conta utilizando e-mail já cadastrado:")
     public void testNewAccountWithEmailAlreadyRegistered() throws Exception {
         HomePage home = new HomePage();
         LoginPage newLogin = new LoginPage();
@@ -251,25 +290,31 @@ public class SetupTest extends BaseTests {/*
                 concat("/index.php?controller=authentication&back=my-account")));
         System.out.println("Clicou em Sign in e direcionou para página de Login.");
 
-        //Prencher campo de e-mail com endereço em formato inválido
+        //Prencher campo de e-mail com endereço de email já cadastrado.
         newLogin.fillEmailAlreadyRegistered();
-        System.out.println("Preencheu o campo com e-mail inválido.");
+        System.out.println("Preencheu o campo com e-mail já cadastrado.");
 
         //Clicar no botão Create an Account
         newLogin.clickBtnCreateAnAccount();
-        System.out.println("Clicou no botão Create Account");
+        System.out.println("Clicou no botão Create Account.");
 
-        //Validar se irá direcionar para página de criação de conta com o campo e-mail vazio
+        //Validar se irá direcionar para página de criação de conta uma vez que foi inserido um e-mail já cadastrado.
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
                 concat("/index.php?controller=authentication&back=my-account")));
 
         assertEquals(emailAlreadyRegisteredMessage, newLogin.getErrorMessageText());
-        System.out.println("Não permitiu o direcionamento para de conta utilizando e-mail já registrado");
+        System.out.println("Não permitiu o direcionamento para a página de criação de nova conta" +
+                " utilizando um endereço de  e-mail já registrado.");
 
-    }//OK
+    }
+
+
+
+
+
 
     @Test
-    @Story("Tentar Realizar Cadastro Com Campos Obrigatórios em Branco")
+    @Story("Tentar realizar cadastro com campos obrigatórios em branco:")
     public void testNewAccountWithoutAnyRequiredField() throws Exception {
         HomePage home = new HomePage();
         LoginPage newLogin = new LoginPage();
@@ -289,7 +334,7 @@ public class SetupTest extends BaseTests {/*
 
         //Clicar no botão Create an Account
         newLogin.clickBtnCreateAnAccount();
-        System.out.println("Clicou no botão Create Account");
+        System.out.println("Clicou no botão Create Account.");
 
         //Ser Direcionado para a página de criação de nova conta
         assertTrue(newAccount.isCreationFormPresent());
@@ -299,15 +344,20 @@ public class SetupTest extends BaseTests {/*
         newAccount.clickRegisterBtn();
         System.out.println("Clicou no no Botão Register");
 
-        //Validar se continuamos na página de criação de conta e se apareceu  a mensagem de erro.
+        //Validar se continuamos na página de criação de conta e se exibiu a mensagem de erro.
         assertTrue(newAccount.isCreationFormPresent());
         assertTrue(newAccount.getErrorMessageText().contains(messageErrorNullFields));
-        System.out.println("Não permitiu o registro sem o preenchimento dos campos obrigatórios");
+        System.out.println("Não permitiu o registro sem o preenchimento dos campos obrigatórios, e exibiu a mensagem de erro.");
 
-    }//OK
+    }
+
+
+
+
+
 
     @Test
-    @Story("Efetuar cadastro com campos válidos preenchidos corretamente")
+    @Story("Efetuar cadastro com campos obrigatórios preenchidos corretamente:")
     public void testNewAccountWithAllRequiredField() throws Exception {
         HomePage home = new HomePage();
         LoginPage newLogin = new LoginPage();
@@ -334,10 +384,12 @@ public class SetupTest extends BaseTests {/*
 
         //Preencher Campos Obrigatórios
         newAccount.fillFormWithValidRequiredFields();
+        System.out.println("Preencheu o formulário com dados válidos.");
+
 
         //Clicar em Register
         newAccount.clickRegisterBtn();
-        System.out.println("Clicou no no Botão Register");
+        System.out.println("Clicou no no Botão Register.");
 
         //Validar se foi direcionado para My Account Page
         assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl()
@@ -345,13 +397,17 @@ public class SetupTest extends BaseTests {/*
         System.out.println("Validou a url de minha conta.");
         assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText()
                 .contains("MY ACCOUNT"));
-        System.out.println("Criou a conta corretamente");
+        System.out.println("Criou a conta corretamente.");
+
+    }
 
 
-    }//okkk
+
+
+
 
     @Test
-    @Story("Efetuar cadastro com campos válidos preenchidos incorretamente")
+    @Story("Efetuar cadastro com campos obrigatórios preenchidos incorretamente:")
     public void testNewAccountWithWrongAllRequiredField() throws Exception {
         HomePage home = new HomePage();
         LoginPage newLogin = new LoginPage();
@@ -371,7 +427,7 @@ public class SetupTest extends BaseTests {/*
 
         //Clicar no botão Create an Account
         newLogin.clickBtnCreateAnAccount();
-        System.out.println("Clicou no botão Create Account");
+        System.out.println("Clicou no botão Create Account.");
 
         //Ser Direcionado para a página de criação de nova conta
         assertTrue(newAccount.isCreationFormPresent());
@@ -379,21 +435,18 @@ public class SetupTest extends BaseTests {/*
 
         //Preencher Campos Obrigatórios
         newAccount.wrongFillFormWithValidRequiredFields();
+        System.out.println("Preencheu o formulário com dados ijnválidos.");
 
         //Clicar em Register
         newAccount.clickRegisterBtn();
-        System.out.println("Clicou no no Botão Register");
+        System.out.println("Clicou no no Botão Register.");
 
         //Validar se permaneceu na mesma página e apresentou mensagem de erro
         assertTrue(newAccount.isCreationFormPresent());
         assertTrue(newAccount.getErrorMessageText().contains(messageErrorFields));
-        System.out.println(" Não permitiu a criação de conta com preenchimento inválido nos campos obrigatórios," +
+        System.out.println(" Não permitiu a criação de conta com preenchimento de dados inválidos nos campos obrigatórios," +
                 "mensagem de erro.");
 
-
-
-
-
-    }//okkk
+    }
 
 }

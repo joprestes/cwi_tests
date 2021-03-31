@@ -138,7 +138,8 @@ public class NewAccountPage extends NewAccountPageElementMapper {
         selectMonthBirth();
         selectYearBirth();
         fillAdress();/* Ele toma como correto qualquer caractere inserido neste campo, sendo ele alfanumérico ou especial,
-        por isso mantive o endereço correto. Não deveria ser setado como campo obrigatório*/
+        por isso mantive o endereço correto. Não deveria ser setado como campo obrigatório, ou ter os parâmetros de validação
+        alterados*/
         wrongFillNewCity();
         selectNewState();
         wrongFillNewZipcode();

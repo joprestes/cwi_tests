@@ -48,13 +48,6 @@ public class HomePage extends HomePageElemetMapper {
     public void clickCategoryTShirts () {
         menuTShirts.click();
 
+    }
 
-    }
-    @Step("Método para ser direcionado para página de Login")
-    public void redirectLoginPage(){
-        clickBtnLogin();
-        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
-                concat("/index.php?controller=authentication&back=my-account")));
-        System.out.println("Clicou em Sign in e direcionou para página de Login.");
-    }
 }
