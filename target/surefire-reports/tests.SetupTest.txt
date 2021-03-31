@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: tests.SetupTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 17.914 s <<< FAILURE! - in tests.SetupTest
-tests.SetupTest.testNewAccount  Time elapsed: 16.906 s  <<< FAILURE!
-java.lang.AssertionError
-	at tests.SetupTest.testNewAccount(SetupTest.java:173)
-
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 97.194 s - in tests.SetupTest

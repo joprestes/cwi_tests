@@ -13,7 +13,7 @@ import utils.Utils;
 import static org.junit.Assert.*;
 
 @Feature("Testes Site de Ecommerce")
-public class SetupTest extends BaseTests {
+public class SetupTest extends BaseTests {/*
 
     @Test
     @Story("Abrir o Site")
@@ -85,7 +85,7 @@ public class SetupTest extends BaseTests {
 
     @Test
     @Story("Acessar a página de Categoria T-Shirts")
-    public void testAcessCategoryTshirts() {
+    public void testAccessCategoryTshirts() {
         //Iniciar as páginas
 
         HomePage home = new HomePage();
@@ -102,10 +102,10 @@ public class SetupTest extends BaseTests {
     }
 
     @Test
-    @Story("Adicionar um produto ao carrinho")
-    public void testAddProductToProductPage (){
+    @Story("Ser direcionado à Página do Produto")
+    public void testViewProductPage() {
         //Acessar a categoria T Shirts
-        testAcessCategoryTshirts();
+        testViewProductPage();
 
         //Iniciar as páginas
         CategoryPage category = new CategoryPage();
@@ -115,7 +115,7 @@ public class SetupTest extends BaseTests {
         String nameProductCategory = category.getProductNameCategory();
 
         //Clicar em More e direcionar para a página do Produto
-        category.clickProductAddToProductPage();
+        category.clickSelectProduct();
 
         //Verificar se o produto está na página de detalhes do produto corretamente
         assertTrue(pdp.getProductNamePDP().equals(nameProductCategory));
@@ -123,11 +123,11 @@ public class SetupTest extends BaseTests {
     }
 
     @Test
-    @Story("Ser direcionado à Página do Carrinho")
+    @Story("Adicionar um produto ao carrinho")
 
-    public void  testAddProductToCartPage () {
+    public void testAddProductToCartPage() {
         //Acessara página de produto
-        testAddProductToProductPage();
+        testViewProductPage();
 
         //Iniciar as páginas
         ProductPage pdp = new ProductPage();
@@ -137,18 +137,24 @@ public class SetupTest extends BaseTests {
         String nameProductPDP = pdp.getProductNamePDP();
 
         //Clicar no botão de adicionar ao carrinho
-        pdp.clickButtonAddToCart ();
+        pdp.clickButtonAddToCart();
 
         //Clicar no botão Proceed to checkout da modal
         pdp.clickButtonModalProceedToCheckout();
 
         //Validação do nome do produto no carrinho
         assertTrue(cart.getProductNameCart().equals(nameProductPDP));
-        }
+    }
+*/
+
+
+    //A partir daqui  são os testes relativos ao desafio web
+
+
 
     @Test
     @Story("Ser Direcionado para página de criação de nova conta")
-    public void testNewAccount () throws Exception {
+    public void testNewAccountPage() throws Exception {
         HomePage home = new HomePage();
         LoginPage newLogin = new LoginPage();
         NewAccountPage newAccount = new NewAccountPage();
@@ -168,136 +174,226 @@ public class SetupTest extends BaseTests {
         newLogin.clickBtnCreateAnAccount();
         System.out.println("Clicou no botão Create Account");
 
-        /*newAccount.waitForCreationFormLoad();
-        Tentei utilizar waitFor, mas mesmo carregando o elemento, ainda não conseguia capturar a url corretamente,
-        optei por utilizar o Thread.sleep
-        Thread.sleep(3000);
-        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains("#account-creation"));*/
 
         //Ser Direcionado para a página de criação de nova conta
         assertTrue(newAccount.isCreationFormPresent());
         System.out.println("Direcionou corretamente para página de New Account.");
     }
 
-        @Test
-        @Story("Tentar ser direcionado à página de criação de contqa sem preencher e-mail")
+    @Test
+    @Story("Tentar ser direcionado à página de criação de conta sem preencher e-mail")
+    public void testNewAccountWithNullEmail() throws Exception {
+        HomePage home = new HomePage();
+        LoginPage newLogin = new LoginPage();
+        String invalidEmailErrorMessage = "Invalid email address.";
 
-        public void testNewAccountWithNullEmail () throws Exception {
-            HomePage home = new HomePage();
-            LoginPage newLogin = new LoginPage();
-
-            //Ser Direcionado para página de login
-            home.clickBtnLogin();
-            assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
-                    concat("/index.php?controller=authentication&back=my-account")));
-            System.out.println("Clicou em Sign in e direcionou para página de Login.");
-
-
-            //Clicar no botão Create an Account sem preenchar e-mail
-            newLogin.clickBtnCreateAnAccount();
-            System.out.println("Clicou no botão Create Account");
-
-            //Validar se irá direcionar para página de criação de conta com o campo e-mail vazio
-            assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
-                    concat("/index.php?controller=authentication&back=my-account")));
-            System.out.println("Não permitiu o direcionamento para de conta sem preenchimento de E-mail");
+        //Ser Direcionado para página de login
+        home.clickBtnLogin();
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
+                concat("/index.php?controller=authentication&back=my-account")));
+        System.out.println("Clicou em Sign in e direcionou para página de Login.");
 
 
-        }
+        //Clicar no botão Create an Account sem preenchar e-mail
+        newLogin.clickBtnCreateAnAccount();
+        System.out.println("Clicou no botão Create Account");
 
-        @Test
-        @Story("Tentar direcionamento para página de criação de conta utilizando e-mail em formato inválido")
-
-        public void testNewAccountWithInvalidEmail () throws Exception {
-            HomePage home = new HomePage();
-            LoginPage newLogin = new LoginPage();
-
-            //Ser Direcionado para página de login
-            home.clickBtnLogin();
-            assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
-                    concat("/index.php?controller=authentication&back=my-account")));
-            System.out.println("Clicou em Sign in e direcionou para página de Login.");
-
-            //Prencher campo de e-mail com endereço em formato inválido
-            newLogin.fillInvalidEmailAdress();
-            System.out.println("Preencheu o campo com e-mail inválido.");
-
-            //Clicar no botão Create an Account
-            newLogin.clickBtnCreateAnAccount();
-            System.out.println("Clicou no botão Create Account");
-
-            //Validar se irá direcionar para página de criação de conta com o campo e-mail vazio
-            assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
-                    concat("/index.php?controller=authentication&back=my-account")));
-            System.out.println("Não permitiu o direcionamento para de conta com preenchimento de E-mail em formato inválido");
-
-        }
-
-        @Test
-        @Step ("Tentar direcionamento para página de criação de conta utilizando e-mail já cadastrado")
-        public void testNewAccountWithEmailAlreadyRegistered () throws Exception {
-            HomePage home = new HomePage();
-            LoginPage newLogin = new LoginPage();
-
-            //Ser Direcionado para página de login
-            home.clickBtnLogin();
-            assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
-                    concat("/index.php?controller=authentication&back=my-account")));
-            System.out.println("Clicou em Sign in e direcionou para página de Login.");
-
-            //Prencher campo de e-mail com endereço em formato inválido
-            newLogin.fillEmailAlreadyRegistered();
-            System.out.println("Preencheu o campo com e-mail inválido.");
-
-            //Clicar no botão Create an Account
-            newLogin.clickBtnCreateAnAccount();
-            System.out.println("Clicou no botão Create Account");
-
-            //Validar se irá direcionar para página de criação de conta com o campo e-mail vazio
-            assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
-                    concat("/index.php?controller=authentication&back=my-account")));
-            System.out.println("Não permitiu o direcionamento para de conta utilizando e-mail já registrado");
-
-        }
-
-        @Test
-        @Step ("Tentar Realizar Cadastro Com Campos Obrigatórios em Branco")
-        public void testNewAccountWithoutRequiredField () throws Exception {
-            HomePage home = new HomePage();
-            LoginPage newLogin = new LoginPage();
-            NewAccountPage newAccount = new NewAccountPage();
+        //Validar se irá direcionar para página de criação de conta com o campo e-mail vazio
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
+                concat("/index.php?controller=authentication&back=my-account")));
+        assertEquals(invalidEmailErrorMessage, newLogin.getErrorMessageText());
+        System.out.println("Não permitiu o direcionamento para de conta sem preenchimento de E-mail");
 
 
-            //Clicar no botão Login da Home
-            home.clickBtnLogin();
-            assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
-                    concat("/index.php?controller=authentication&back=my-account")));
-            System.out.println("Clicou em Sign in e direcionou para página de Login.");
+    }//ok
 
-            //Preencher e-mail para criação de nova conta
-            newLogin.fillEmailAdress();
-            System.out.println("Preencheu o e-mail.");
+    @Test
+    @Story("Tentar direcionamento para página de criação de conta utilizando e-mail em formato inválido")
+    public void testNewAccountWithInvalidEmail() throws Exception {
+        HomePage home = new HomePage();
+        LoginPage newLogin = new LoginPage();
+        String invalidEmailErrorMessage = "Invalid email address.";
 
-            //Clicar no botão Create an Account
-            newLogin.clickBtnCreateAnAccount();
-            System.out.println("Clicou no botão Create Account");
+        //Ser Direcionado para página de login
+        home.clickBtnLogin();
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
+                concat("/index.php?controller=authentication&back=my-account")));
+        System.out.println("Clicou em Sign in e direcionou para página de Login.");
 
-            //Ser Direcionado para a página de criação de nova conta
-            assertTrue(newAccount.isCreationFormPresent());
-            System.out.println("Direcionou corretamente para página de New Account.");
+        //Prencher campo de e-mail com endereço em formato inválido
+        newLogin.fillInvalidEmailAdress();
+        System.out.println("Preencheu o campo com e-mail inválido.");
 
-            //Clicar em Register
-            newAccount.clickRegisterBtn();
-            System.out.println("Clicou no no Botão Register");
+        //Clicar no botão Create an Account
+        newLogin.clickBtnCreateAnAccount();
+        System.out.println("Clicou no botão Create Account");
 
-            //Validar se continuamos na página de criação de conta.
-            assertTrue(newAccount.isCreationFormPresent());
-            System.out.println("Não permitiu o registro sem o preenchimento dos campos obrigatórios");
+        //Validar se irá direcionar para página de criação de conta com o campo e-mail vazio
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
+                concat("/index.php?controller=authentication&back=my-account")));
+        assertEquals(invalidEmailErrorMessage, newLogin.getErrorMessageText());
 
-        }
+        System.out.println("Não permitiu o direcionamento para de conta com preenchimento de E-mail em formato inválido");
+
+    }//ok
+
+    @Test
+    @Story("Tentar direcionamento para página de criação de conta utilizando e-mail já cadastrado")
+    public void testNewAccountWithEmailAlreadyRegistered() throws Exception {
+        HomePage home = new HomePage();
+        LoginPage newLogin = new LoginPage();
+        String emailAlreadyRegisteredMessage = "An account using this email address has already been registered. " +
+                "Please enter a valid password or request a new one.";
+
+        //Ser Direcionado para página de login
+        home.clickBtnLogin();
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
+                concat("/index.php?controller=authentication&back=my-account")));
+        System.out.println("Clicou em Sign in e direcionou para página de Login.");
+
+        //Prencher campo de e-mail com endereço em formato inválido
+        newLogin.fillEmailAlreadyRegistered();
+        System.out.println("Preencheu o campo com e-mail inválido.");
+
+        //Clicar no botão Create an Account
+        newLogin.clickBtnCreateAnAccount();
+        System.out.println("Clicou no botão Create Account");
+
+        //Validar se irá direcionar para página de criação de conta com o campo e-mail vazio
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
+                concat("/index.php?controller=authentication&back=my-account")));
+
+        assertEquals(emailAlreadyRegisteredMessage, newLogin.getErrorMessageText());
+        System.out.println("Não permitiu o direcionamento para de conta utilizando e-mail já registrado");
+
+    }//OK
+
+    @Test
+    @Story("Tentar Realizar Cadastro Com Campos Obrigatórios em Branco")
+    public void testNewAccountWithoutAnyRequiredField() throws Exception {
+        HomePage home = new HomePage();
+        LoginPage newLogin = new LoginPage();
+        NewAccountPage newAccount = new NewAccountPage();
+        String messageErrorNullFields = "There are 8 errors";
+
+
+        //Clicar no botão Login da Home
+        home.clickBtnLogin();
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
+                concat("/index.php?controller=authentication&back=my-account")));
+        System.out.println("Clicou em Sign in e direcionou para página de Login.");
+
+        //Preencher e-mail para criação de nova conta
+        newLogin.fillEmailAdress();
+        System.out.println("Preencheu o e-mail.");
+
+        //Clicar no botão Create an Account
+        newLogin.clickBtnCreateAnAccount();
+        System.out.println("Clicou no botão Create Account");
+
+        //Ser Direcionado para a página de criação de nova conta
+        assertTrue(newAccount.isCreationFormPresent());
+        System.out.println("Direcionou corretamente para página de New Account.");
+
+        //Clicar em Register
+        newAccount.clickRegisterBtn();
+        System.out.println("Clicou no no Botão Register");
+
+        //Validar se continuamos na página de criação de conta e se apareceu  a mensagem de erro.
+        assertTrue(newAccount.isCreationFormPresent());
+        assertTrue(newAccount.getErrorMessageText().contains(messageErrorNullFields));
+        System.out.println("Não permitiu o registro sem o preenchimento dos campos obrigatórios");
+
+    }//OK
+
+    @Test
+    @Story("Efetuar cadastro com campos válidos preenchidos corretamente")
+    public void testNewAccountWithAllRequiredField() throws Exception {
+        HomePage home = new HomePage();
+        LoginPage newLogin = new LoginPage();
+        NewAccountPage newAccount = new NewAccountPage();
+
+
+        //Clicar no botão Login da Home
+        home.clickBtnLogin();
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
+                concat("/index.php?controller=authentication&back=my-account")));
+        System.out.println("Clicou em Sign in e direcionou para página de Login.");
+
+        //Preencher e-mail para criação de nova conta
+        newLogin.fillEmailAdress();
+        System.out.println("Preencheu o e-mail.");
+
+        //Clicar no botão Create an Account
+        newLogin.clickBtnCreateAnAccount();
+        System.out.println("Clicou no botão Create Account");
+
+        //Ser Direcionado para a página de criação de nova conta
+        assertTrue(newAccount.isCreationFormPresent());
+        System.out.println("Direcionou corretamente para página de New Account.");
+
+        //Preencher Campos Obrigatórios
+        newAccount.fillFormWithValidRequiredFields();
+
+        //Clicar em Register
+        newAccount.clickRegisterBtn();
+        System.out.println("Clicou no no Botão Register");
+
+        //Validar se foi direcionado para My Account Page
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl()
+                .concat("/index.php?controller=my-account")));
+        System.out.println("Validou a url de minha conta.");
+        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading")).getText()
+                .contains("MY ACCOUNT"));
+        System.out.println("Criou a conta corretamente");
+
+
+    }//okkk
+
+    @Test
+    @Story("Efetuar cadastro com campos válidos preenchidos incorretamente")
+    public void testNewAccountWithWrongAllRequiredField() throws Exception {
+        HomePage home = new HomePage();
+        LoginPage newLogin = new LoginPage();
+        NewAccountPage newAccount = new NewAccountPage();
+        String messageErrorFields = "There are 5 errors";
+
+
+        //Clicar no botão Login da Home
+        home.clickBtnLogin();
+        assertTrue(Browser.getCurrentDriver().getCurrentUrl().contains(Utils.getBaseUrl().
+                concat("/index.php?controller=authentication&back=my-account")));
+        System.out.println("Clicou em Sign in e direcionou para página de Login.");
+
+        //Preencher e-mail para criação de nova conta
+        newLogin.fillEmailAdress();
+        System.out.println("Preencheu o e-mail.");
+
+        //Clicar no botão Create an Account
+        newLogin.clickBtnCreateAnAccount();
+        System.out.println("Clicou no botão Create Account");
+
+        //Ser Direcionado para a página de criação de nova conta
+        assertTrue(newAccount.isCreationFormPresent());
+        System.out.println("Direcionou corretamente para página de New Account.");
+
+        //Preencher Campos Obrigatórios
+        newAccount.wrongFillFormWithValidRequiredFields();
+
+        //Clicar em Register
+        newAccount.clickRegisterBtn();
+        System.out.println("Clicou no no Botão Register");
+
+        //Validar se permaneceu na mesma página e apresentou mensagem de erro
+        assertTrue(newAccount.isCreationFormPresent());
+        assertTrue(newAccount.getErrorMessageText().contains(messageErrorFields));
+        System.out.println(" Não permitiu a criação de conta com preenchimento inválido nos campos obrigatórios," +
+                "mensagem de erro.");
 
 
 
 
+
+    }//okkk
 
 }

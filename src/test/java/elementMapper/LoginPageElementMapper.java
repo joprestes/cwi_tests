@@ -17,6 +17,9 @@ public class LoginPageElementMapper {
     @FindBy (css=".submit #SubmitCreate")
     public WebElement createAnAccount;
 
+    @FindBy (css = "#create_account_error li")
+    public WebElement errorLabel;
+
 
 
 

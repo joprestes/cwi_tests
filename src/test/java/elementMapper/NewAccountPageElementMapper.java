@@ -16,13 +16,13 @@ public class NewAccountPageElementMapper {
     @FindBy (css=".form-group #passwd" )
     public WebElement newPasswd;
 
-    @FindBy(id="uniform-days")
+    @FindBy(id="days")
     public WebElement dayBirth;
 
-    @FindBy (id = "uniform-months")
+    @FindBy (id = "months")
     public WebElement monthBirth;
 
-    @FindBy (id = "uniform-years")
+    @FindBy (id = "years")
     public WebElement yearBirth;
 
     @FindBy(css=".form-group #address1")
@@ -31,15 +31,18 @@ public class NewAccountPageElementMapper {
     @FindBy(css=".form-group #city")
     public WebElement city;
 
-    @FindBy(id = "uniform-id_state")
+    @FindBy(id = "id_state")
     public WebElement state;
 
-    @FindBy (id = " form-control uniform-input text")
+    @FindBy (id = "postcode")
     public WebElement zipcode;
 
-    @FindBy (css = ".form-group #phone_mobile")
+    @FindBy (id = "phone_mobile")
     public WebElement mobilePhoneNumber;
 
     @FindBy (css = "#submitAccount.btn")
     public WebElement btnSubmitAccount;
+
+    @FindBy (css = ".alert.alert-danger")
+    public WebElement errorMessage;
 }

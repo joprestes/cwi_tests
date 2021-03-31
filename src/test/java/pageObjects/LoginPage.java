@@ -7,6 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Browser;
 
+import java.util.Random;
+
 public class LoginPage extends LoginPageElementMapper {
 
     public LoginPage(){
@@ -36,7 +38,10 @@ public class LoginPage extends LoginPageElementMapper {
 
     @Step ("Preencheu Email Adress")
     public void fillEmailAdress(){
-        newEmail.sendKeys("cwiteste@gmail.com");
+        Random random = new Random();
+        int x = random.nextInt(999);
+        String newEmailAdress = "cwiteste" + x + "@gmail.com";
+        newEmail.sendKeys(newEmailAdress);
     }
 
     @Step("Clicou no botão New Account")
@@ -52,6 +57,10 @@ public class LoginPage extends LoginPageElementMapper {
     @Step("Preencheu com e-mail já existente")
     public void fillEmailAlreadyRegistered(){
         newEmail.sendKeys("meuemail@gmail.com");
+    }
+    @Step("Retornar mensagem de erro")
+    public String getErrorMessageText (){
+        return errorLabel.getText();
     }
 
 

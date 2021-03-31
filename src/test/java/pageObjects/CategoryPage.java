@@ -19,7 +19,7 @@ public class CategoryPage extends CategoryPageElementMapper {
 
     }
 
-    public void clickProductAddToProductPage() {
+    public void clickSelectProduct() {
         BasePage.mouseOver(productNameCategory);
         buttonMoreAddToProductPage.click();
 
