@@ -16,39 +16,25 @@ public class NewAccountPage extends NewAccountPageElementMapper {
         PageFactory.initElements(Browser.getCurrentDriver(),this);
     }
 
+
     @Step("Clicar No Gênero")
     public void selectGender(){
         gender.click();
-            }
-
-    @Step ("Preencher Primeiro Nome")
-    public void fillFirstName () {
-        firstName.sendKeys("Aurora");
     }
 
-    @Step("Preencher Primeiro Nome Com Caractetes Inválidos")
-    public void wrongFillFirstName () {
-        firstName.sendKeys("1");
+    @Step ("Preencher Primeiro Nome")
+    public void fillFirstName (String informedFirstName) {
+        firstName.sendKeys(informedFirstName);
     }
 
     @Step("Preencher Último Nome")
-    public void fillLastName(){
-        lastName.sendKeys("Boreal");
-    }
-
-    @Step("Preencher Último Nome Com Caractetes Inválidos")
-    public void wrongFillLastName(){
-        lastName.sendKeys("1");
+    public void fillLastName(String informedLastName){
+        lastName.sendKeys(informedLastName);
     }
 
     @Step("Preencher Senha")
-    public void fillNewPasswd(){
-        newPasswd.sendKeys("12345");
-    }
-
-    @Step("Preencher Senha Com Número De Caracteres Inferior Ao Mínimo Aceito")
-    public void wrongFillNewPasswd(){
-        newPasswd.sendKeys("1");
+    public void fillNewPasswd(String informedPassword){
+        newPasswd.sendKeys(informedPassword);
     }
 
     @Step("Selecionar Dia Do Aniversário")
@@ -73,13 +59,8 @@ public class NewAccountPage extends NewAccountPageElementMapper {
 
 
     @Step ("Preencher Cidade")
-    public void fillNewCity(){
-        city.sendKeys("Spingrifield");
-    }
-
-    @Step ("Preencher Cidade Com Caracteres Inválidos")
-    public void wrongFillNewCity(){
-        city.sendKeys("1");
+    public void fillNewCity(String informedCity){
+        city.sendKeys(informedCity);
     }
 
     @Step("Selecionar Estado")
@@ -88,23 +69,13 @@ public class NewAccountPage extends NewAccountPageElementMapper {
     }
 
     @Step("Preencher CEP")
-    public void fillNewZipcode(){
-        zipcode.sendKeys("12345");
-    }
-
-    @Step("Preencher CEP Com Número De Caracteres Inferior Ao Mínimo Aceito")
-    public void wrongFillNewZipcode(){
-        zipcode.sendKeys("1");
+    public void fillNewZipcode(String informedZipCode){
+        zipcode.sendKeys(informedZipCode);
     }
 
     @Step("Preencher Número De Telefone Para Contato")
-    public void fillMobilePhoneNumber(){
-        mobilePhoneNumber.sendKeys("999999999");
-    }
-
-    @Step("Preencher Número De Telefone Com Caracteres Insuficientes")
-    public void wrongFillMobilePhoneNumber(){
-        mobilePhoneNumber.sendKeys("a");
+    public void fillMobilePhoneNumber(String informedPhoneNumber){
+        mobilePhoneNumber.sendKeys(informedPhoneNumber);
     }
 
     @Step("Clicar no botão Register")
@@ -115,35 +86,35 @@ public class NewAccountPage extends NewAccountPageElementMapper {
     @Step("Método para Preencher o Formulário com Dados  válidos")
     public void fillFormWithValidRequiredFields (){
         selectGender();
-        fillFirstName();
-        fillLastName();
-        fillNewPasswd();
+        fillFirstName("Aurora");
+        fillLastName("Boreal");
+        fillNewPasswd("12345");
         selectDayBirth();
         selectMonthBirth();
         selectYearBirth();
         fillAdress();
-        fillNewCity();
+        fillNewCity("Springfield");
         selectNewState();
-        fillNewZipcode();
-        fillMobilePhoneNumber();
+        fillNewZipcode("12345");
+        fillMobilePhoneNumber("999999999");
     }
 
     @Step("Método Para Preencher O Formulário Com Dados Inválidos")
     public void wrongFillFormWithValidRequiredFields (){
         selectGender();
-        wrongFillFirstName();
-        wrongFillLastName();
-        wrongFillNewPasswd();
+        fillFirstName("1");
+        fillLastName("1");
+        fillNewPasswd("1");
         selectDayBirth();
         selectMonthBirth();
         selectYearBirth();
         fillAdress();/* Ele toma como correto qualquer caractere inserido neste campo, sendo ele alfanumérico ou especial,
         por isso mantive o endereço correto. Não deveria ser setado como campo obrigatório, ou ter os parâmetros de validação
         alterados*/
-        wrongFillNewCity();
+        fillNewCity("1");
         selectNewState();
-        wrongFillNewZipcode();
-        wrongFillMobilePhoneNumber();
+        fillNewZipcode("1");
+        fillMobilePhoneNumber("a");
     }
 
     @Step ("Validar CREATE AN ACCOUNT")
@@ -162,3 +133,4 @@ public class NewAccountPage extends NewAccountPageElementMapper {
     }
 
 }
+
