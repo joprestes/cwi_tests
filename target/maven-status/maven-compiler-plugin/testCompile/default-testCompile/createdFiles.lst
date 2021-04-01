@@ -6,11 +6,10 @@ elementMapper\ProductPageElementMapper.class
 utils\Utils.class
 pageObjects\CategoryPage.class
 pageObjects\HomePage.class
-elementMapper\MyAccountPageElementMaper.class
 pageObjects\NewAccountPage.class
-pageObjects\MyAccountPage.class
 pageObjects\ProductPage.class
 tests\BaseTests.class
+tests\DesafioWebTests.class
 elementMapper\HomePageElemetMapper.class
 pageObjects\LoginPage.class
 pageObjects\BasePage.class
@@ -18,4 +17,3 @@ pageObjects\CartPage.class
 elementMapper\SearchPageElementMapper.class
 pageObjects\SearchPage.class
 elementMapper\NewAccountPageElementMapper.class
-tests\SetupTest.class

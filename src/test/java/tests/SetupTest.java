@@ -11,7 +11,7 @@ import utils.Browser;
 import utils.Utils;
 
 import static org.junit.Assert.*;
-
+/*
 @Feature("Testes Site de Ecommerce")
 public class SetupTest extends BaseTests {
 
@@ -173,4 +173,4 @@ public class SetupTest extends BaseTests {
 
 
 
-}
+}*/

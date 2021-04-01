@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -12,6 +13,8 @@ import utils.Utils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+
+@Feature("Testes Site de Ecommerce - Desafio Web")
 public class DesafioWebTests  extends BaseTests{
     @Test
     @Story("Ser direcionado para página de criação de nova conta:")
@@ -119,8 +122,8 @@ public class DesafioWebTests  extends BaseTests{
     public void testNewAccountWithEmailAlreadyRegistered() throws Exception {
         HomePage home = new HomePage();
         LoginPage newLogin = new LoginPage();
-        String emailAlreadyRegisteredMessage = "An account using this email address has already been registered. " +
-                "Please enter a valid password or request a new one.";
+        String emailAlreadyRegisteredMessage ="An account using this email address has already been registered" +
+                ". Please enter a valid password or request a new one. ";
 
         //Ser Direcionado para página de login
         home.clickBtnLogin();
